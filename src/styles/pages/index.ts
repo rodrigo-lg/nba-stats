@@ -20,6 +20,12 @@ export const Cover = styled.div`
         text-decoration: underline;
         color: #ffffff;
     }
+
+    @media (max-width: 500px) {
+        h1 {
+            font-size: 2.5em;
+        }
+    }
 `;
 
 export const Container = styled.div`
