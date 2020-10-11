@@ -59,7 +59,9 @@
             2,
             4
         ],
-        "jsx-a11y/anchor-is-valid": "off"
+        "jsx-a11y/anchor-is-valid": "off",
+        "react/prop-types": "off",
+        "camelcase": "off"
     },
     "settings": {
         "import/resolver": {
