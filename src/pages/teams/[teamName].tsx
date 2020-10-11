@@ -57,7 +57,6 @@ export default function TeamPage({
     team,
     teamStats,
 }: TeamPageProps): JSX.Element {
-    console.log(team);
     return (
         <>
             <Header />
