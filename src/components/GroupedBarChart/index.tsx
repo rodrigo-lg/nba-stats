@@ -57,6 +57,9 @@ export default function GroupedBarChart({
             xaxis: {
                 categories,
             },
+            tooltip: {
+                theme: 'dark',
+            },
             responsive: [
                 {
                     breakpoint: 800,
