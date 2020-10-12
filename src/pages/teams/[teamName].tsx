@@ -26,14 +26,12 @@ interface Team {
 }
 
 interface TeamStats {
-    minutes: number;
     games: number;
     wins: number;
     losses: number;
     field_goals_made: number;
     field_goals_attempted: number;
     points: number;
-    blocked_shots: number;
     two_pointers_made: number;
     two_pointers_attempted: number;
     three_pointers_made: number;
@@ -91,10 +89,6 @@ export default function TeamPage({
                             <span>Number of games played:</span>
                             {teamStats.games}
                         </p>
-                        <p>
-                            <span>Minutes played:</span>
-                            {teamStats.minutes}
-                        </p>
                     </Info>
 
                     <PieChart
@@ -114,10 +108,6 @@ export default function TeamPage({
                         <p>
                             <span>Number of points:</span>
                             {teamStats.points}
-                        </p>
-                        <p>
-                            <span>Number of blocked shots:</span>
-                            {teamStats.blocked_shots}
                         </p>
                     </PointsInfo>
 
@@ -204,7 +194,7 @@ export const getServerSideProps: GetServerSideProps<TeamPageProps> = async conte
     const [team] = await response.json();
 
     const statsColumns =
-        'games, minutes, wins, losses, rebounds, blocked_shots, points, field_goals_made, field_goals_attempted, two_pointers_made, two_pointers_attempted, three_pointers_made, three_pointers_attempted, free_throws_made, free_throws_attempted, offensive_rebounds, defensive_rebounds, assists, steals, turnovers';
+        'games, wins, losses, rebounds, points, field_goals_made, field_goals_attempted, two_pointers_made, two_pointers_attempted, three_pointers_made, three_pointers_attempted, free_throws_made, free_throws_attempted, offensive_rebounds, defensive_rebounds, assists, steals, turnovers';
 
     dbQuery = `SELECT ${statsColumns} 
                     FROM team_stats 
