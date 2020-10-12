@@ -33,7 +33,10 @@ export default function PieChart({
                     breakpoint: 480,
                     options: {
                         chart: {
-                            width: 200,
+                            width: 320,
+                        },
+                        title: {
+                            align: 'center',
                         },
                         legend: {
                             position: 'bottom',

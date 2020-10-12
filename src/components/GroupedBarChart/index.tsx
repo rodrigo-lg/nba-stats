@@ -57,6 +57,21 @@ export default function GroupedBarChart({
             xaxis: {
                 categories,
             },
+            responsive: [
+                {
+                    breakpoint: 800,
+                    options: {
+                        plotOptions: {
+                            bar: {
+                                horizontal: false,
+                            },
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            ],
         },
     };
 
