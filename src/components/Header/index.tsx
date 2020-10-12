@@ -20,7 +20,7 @@ export default function Header(): JSX.Element {
         home: pathname === '/',
         players: pathname === '/players',
         teams: pathname === '/teams',
-        highlights: pathname === '/highlights',
+        compare: pathname === '/compare',
     };
 
     return (
@@ -37,10 +37,8 @@ export default function Header(): JSX.Element {
                 <Link href="/teams">
                     <Anchor currentPage={isCurrentPage.teams}>Teams</Anchor>
                 </Link>
-                <Link href="/highlights">
-                    <Anchor currentPage={isCurrentPage.highlights}>
-                        Highlights
-                    </Anchor>
+                <Link href="/compare">
+                    <Anchor currentPage={isCurrentPage.compare}>Compare</Anchor>
                 </Link>
                 <Burger onClick={() => setShowMenu(true)}>
                     <div />
@@ -63,9 +61,9 @@ export default function Header(): JSX.Element {
                     </MobileAnchor>
                 </Link>
 
-                <Link href="/highlights">
-                    <MobileAnchor currentPage={isCurrentPage.highlights}>
-                        Highlights
+                <Link href="/compare">
+                    <MobileAnchor currentPage={isCurrentPage.compare}>
+                        Compare
                     </MobileAnchor>
                 </Link>
             </Menu>
