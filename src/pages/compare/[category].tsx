@@ -82,7 +82,7 @@ export default function Comparison(): JSX.Element {
     const { query } = useRouter();
 
     const fetchTeamsData = useCallback(async () => {
-        let dbQuery = `SELECT team_id, city, name, conference, division, wikipedia_logo_url, primary_color, secondary_color,
+        let dbQuery = `SELECT team_id, city, name, conference, division, wikipedia_logo_url, primary_color, secondary_color
                             FROM teams 
                             WHERE name = '${query.first}' OR name = '${query.second}'
                             ORDER BY team_id`;
