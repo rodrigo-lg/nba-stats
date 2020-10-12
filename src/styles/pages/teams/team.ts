@@ -16,6 +16,10 @@ export const Container = styled.div`
         flex-direction: column;
         align-items: center;
     }
+
+    @media (max-width: 600px) {
+        width: 90%;
+    }
 `;
 
 export const Team = styled.div`
@@ -58,6 +62,29 @@ export const Team = styled.div`
 
     @media (max-width: 1400px) {
         width: 100%;
+    }
+
+    @media (max-width: 600px) {
+        img {
+            height: 144px;
+        }
+
+        div {
+            margin-left: 15px;
+            h1 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    }
+
+    @media (max-width: 400px) {
+        img {
+            height: 120px;
+        }
     }
 `;
 
@@ -126,6 +153,12 @@ export const Info = styled.div`
     @media (max-width: 800px) {
         margin-bottom: 20px;
     }
+
+    @media (max-width: 600px) {
+        h2 {
+            font-size: 1.2em;
+        }
+    }
 `;
 
 export const PointsInfo = styled.div`
@@ -147,5 +180,11 @@ export const PointsInfo = styled.div`
 
     p + p {
         margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+        h2 {
+            font-size: 1.2em;
+        }
     }
 `;
