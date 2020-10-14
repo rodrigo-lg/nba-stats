@@ -12,6 +12,7 @@ import {
     Plays,
     Info,
     PointsInfo,
+    Error,
 } from '@/styles/pages/players/player';
 
 import positions from '@/utils/positions';
@@ -64,132 +65,138 @@ export default function PlayerPage({
         <>
             <Header />
             <Container>
-                <Player>
-                    <div>
-                        <div>
-                            <img
-                                src={player.photo_url}
-                                alt={`${player.first_name} ${player.last_name}`}
+                {Object.keys(playerStats).length !== 0 ? (
+                    <>
+                        <Player>
+                            <div>
+                                <div>
+                                    <img
+                                        src={player.photo_url}
+                                        alt={`${player.first_name} ${player.last_name}`}
+                                    />
+
+                                    <h1>{`${player.first_name} ${player.last_name}`}</h1>
+                                </div>
+                                <div>
+                                    <p>
+                                        <span>Team: </span>
+                                        {teams[player.team].name}
+                                    </p>
+                                    <p>
+                                        <span>Position: </span>
+                                        {positions[player.position]}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <PersonalInfo>
+                                <h2>Personal info</h2>
+                                <p>
+                                    <span>Height: </span>
+                                    {`${player.height} `}
+                                    in
+                                </p>
+                                <p>
+                                    <span>Weight: </span>
+                                    {`${player.weight} `}
+                                    lbs
+                                </p>
+                                <p>
+                                    <span>Jersey number:</span>
+                                    {player.jersey}
+                                </p>
+                                <p>
+                                    <span>Years on the NBA:</span>
+                                    {player.experience}
+                                </p>
+                            </PersonalInfo>
+                        </Player>
+
+                        <Performance>
+                            <PointsInfo>
+                                <h2>Performance</h2>
+                                <p>
+                                    <span>Number of games played:</span>
+                                    {playerStats.games}
+                                </p>
+                                <p>
+                                    <span>Number of minutes played:</span>
+                                    {playerStats.minutes}
+                                </p>
+                                <p>
+                                    <span>Points made:</span>
+                                    {playerStats.points}
+                                </p>
+                            </PointsInfo>
+
+                            <GroupedBarChart
+                                series1={[
+                                    playerStats.field_goals_made,
+                                    playerStats.two_pointers_made,
+                                    playerStats.three_pointers_made,
+                                    playerStats.free_throws_made,
+                                ]}
+                                series2={[
+                                    playerStats.field_goals_attempted,
+                                    playerStats.two_pointers_attempted,
+                                    playerStats.three_pointers_attempted,
+                                    playerStats.free_throws_attempted,
+                                ]}
+                                categories={[
+                                    'Field goals',
+                                    'Two pointers',
+                                    'Three pointers',
+                                    'Free throws',
+                                ]}
+                                colors={[
+                                    `#${teams[player.team].primary_color}`,
+                                    `#${teams[player.team].secondary_color}`,
+                                ]}
                             />
+                        </Performance>
 
-                            <h1>{`${player.first_name} ${player.last_name}`}</h1>
-                        </div>
-                        <div>
-                            <p>
-                                <span>Team: </span>
-                                {teams[player.team].name}
-                            </p>
-                            <p>
-                                <span>Position: </span>
-                                {positions[player.position]}
-                            </p>
-                        </div>
-                    </div>
+                        <Plays>
+                            <Info>
+                                <h2>Plays</h2>
+                                <p>
+                                    <span>Number of assists:</span>
+                                    {playerStats.assists}
+                                </p>
+                                <p>
+                                    <span>Number of blocked shots:</span>
+                                    {playerStats.blocked_shots}
+                                </p>
+                                <p>
+                                    <span>Number of rebounds:</span>
+                                    {playerStats.rebounds}
+                                </p>
+                                <p>
+                                    <span>Number of steals:</span>
+                                    {playerStats.steals}
+                                </p>
+                                <p>
+                                    <span>Number of turnovers:</span>
+                                    {playerStats.turnovers}
+                                </p>
+                            </Info>
 
-                    <PersonalInfo>
-                        <h2>Personal info</h2>
-                        <p>
-                            <span>Height: </span>
-                            {`${player.height} `}
-                            in
-                        </p>
-                        <p>
-                            <span>Weight: </span>
-                            {`${player.weight} `}
-                            lbs
-                        </p>
-                        <p>
-                            <span>Jersey number:</span>
-                            {player.jersey}
-                        </p>
-                        <p>
-                            <span>Years on the NBA:</span>
-                            {player.experience}
-                        </p>
-                    </PersonalInfo>
-                </Player>
-
-                <Performance>
-                    <PointsInfo>
-                        <h2>Performance</h2>
-                        <p>
-                            <span>Number of games played:</span>
-                            {playerStats.games}
-                        </p>
-                        <p>
-                            <span>Number of minutes played:</span>
-                            {playerStats.minutes}
-                        </p>
-                        <p>
-                            <span>Points made:</span>
-                            {playerStats.points}
-                        </p>
-                    </PointsInfo>
-
-                    <GroupedBarChart
-                        series1={[
-                            playerStats.field_goals_made,
-                            playerStats.two_pointers_made,
-                            playerStats.three_pointers_made,
-                            playerStats.free_throws_made,
-                        ]}
-                        series2={[
-                            playerStats.field_goals_attempted,
-                            playerStats.two_pointers_attempted,
-                            playerStats.three_pointers_attempted,
-                            playerStats.free_throws_attempted,
-                        ]}
-                        categories={[
-                            'Field goals',
-                            'Two pointers',
-                            'Three pointers',
-                            'Free throws',
-                        ]}
-                        colors={[
-                            `#${teams[player.team].primary_color}`,
-                            `#${teams[player.team].secondary_color}`,
-                        ]}
-                    />
-                </Performance>
-
-                <Plays>
-                    <Info>
-                        <h2>Plays</h2>
-                        <p>
-                            <span>Number of assists:</span>
-                            {playerStats.assists}
-                        </p>
-                        <p>
-                            <span>Number of blocked shots:</span>
-                            {playerStats.blocked_shots}
-                        </p>
-                        <p>
-                            <span>Number of rebounds:</span>
-                            {playerStats.rebounds}
-                        </p>
-                        <p>
-                            <span>Number of steals:</span>
-                            {playerStats.steals}
-                        </p>
-                        <p>
-                            <span>Number of turnovers:</span>
-                            {playerStats.turnovers}
-                        </p>
-                    </Info>
-
-                    <PieChart
-                        series={[
-                            playerStats.offensive_rebounds,
-                            playerStats.defensive_rebounds,
-                        ]}
-                        title="Types of rebounds"
-                        labels={['Offensive', 'Defensive']}
-                        colors={[
-                            `#${teams[player.team].primary_color}`,
-                            `#${teams[player.team].secondary_color}`,
-                        ]}
-                    />
-                </Plays>
+                            <PieChart
+                                series={[
+                                    playerStats.offensive_rebounds,
+                                    playerStats.defensive_rebounds,
+                                ]}
+                                title="Types of rebounds"
+                                labels={['Offensive', 'Defensive']}
+                                colors={[
+                                    `#${teams[player.team].primary_color}`,
+                                    `#${teams[player.team].secondary_color}`,
+                                ]}
+                            />
+                        </Plays>
+                    </>
+                ) : (
+                    <Error>This player doesn't have any statistics :(</Error>
+                )}
             </Container>
         </>
     );
@@ -227,11 +234,13 @@ export const getServerSideProps: GetServerSideProps<PlayerPageProps> = async con
         },
     });
 
-    const [playerStats] = await response.json();
+    let [playerStats] = await response.json();
 
-    Object.keys(playerStats).map(key => {
-        playerStats[key] = Number(playerStats[key]);
-    });
+    if (playerStats)
+        Object.keys(playerStats).map(key => {
+            playerStats[key] = Number(playerStats[key]);
+        });
+    else playerStats = {};
 
     return {
         props: {

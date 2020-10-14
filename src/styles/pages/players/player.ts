@@ -168,3 +168,10 @@ export const PointsInfo = styled.div`
         margin-top: 10px;
     }
 `;
+
+export const Error = styled.p`
+    width: 100%;
+
+    text-align: center;
+    font-size: 1.5em;
+`;
