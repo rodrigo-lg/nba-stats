@@ -8,7 +8,6 @@ interface GroupedBarChartProps {
     categories: string[];
     colors: string[];
     title: string;
-    max: number;
     height: number;
 }
 
@@ -18,7 +17,6 @@ export default function OpposingBarsChart({
     categories,
     colors,
     title,
-    max,
     height,
 }: GroupedBarChartProps): JSX.Element {
     const graph = {
@@ -64,8 +62,7 @@ export default function OpposingBarsChart({
                 },
             },
             yaxis: {
-                min: -max,
-                max,
+                forceNiceScale: true,
             },
             tooltip: {
                 shared: false,
