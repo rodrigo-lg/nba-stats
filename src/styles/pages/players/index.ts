@@ -105,6 +105,18 @@ export const Players = styled.div`
             width: 90%;
         }
     }
+
+    @media (max-width: 450px) {
+        ul {
+            li {
+                font-size: 0.8em;
+            }
+
+            span {
+                font-size: 1em;
+            }
+        }
+    }
 `;
 
 export const Page = styled.nav`

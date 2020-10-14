@@ -180,7 +180,6 @@ export default function Comparison(): JSX.Element {
                 fetchedPlayersStats[0][key] = -fetchedPlayersStats[0][key];
             });
 
-            console.log(fetchedPlayersStats);
             setPlayers(fetchedPlayers);
             setPlayersStats(fetchedPlayersStats);
         } else setError(true);

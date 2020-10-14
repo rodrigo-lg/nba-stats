@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     margin: calc(94px + 2em) auto 80px;
     width: 90%;
-    padding: 20px;
+    padding: 16px 12px;
     border-radius: 16px;
     max-width: 600px;
     display: flex;
@@ -80,6 +80,16 @@ export const Team = styled.div`
             height: 120px;
             width: 120px;
         }
+
+        ul {
+            li:first-child {
+                font-size: 1.2em;
+            }
+
+            li {
+                font-size: 0.9em;
+            }
+        }
     }
 `;
 
@@ -126,6 +136,18 @@ export const Player = styled.div`
 
             li {
                 font-size: 1em;
+            }
+        }
+    }
+
+    @media (max-width: 400px) {
+        ul {
+            li:first-child {
+                font-size: 1em;
+            }
+
+            li {
+                font-size: 0.9em;
             }
         }
     }
