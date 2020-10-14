@@ -68,7 +68,9 @@ export default function PlayersPage({
         }
     }, [router, pageNumber]);
 
-    async function handleSearch() {
+    async function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
         if (searchInputRef.current.value) {
             const searchPlayer = searchInputRef.current.value;
 
@@ -110,15 +112,13 @@ export default function PlayersPage({
         <>
             <Header />
             <Container>
-                <div>
+                <form onSubmit={handleSearch}>
                     <SearchBar
                         placeholder="Search for a player"
                         ref={searchInputRef}
                     />
-                    <button type="button" onClick={handleSearch}>
-                        Search
-                    </button>
-                </div>
+                    <button type="submit">Search</button>
+                </form>
             </Container>
             <Players>
                 {!searchedPlayers.length &&

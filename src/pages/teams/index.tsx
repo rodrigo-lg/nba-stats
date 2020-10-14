@@ -62,7 +62,9 @@ export default function TeamsPage({
         }
     }, [router, pageNumber]);
 
-    async function handleSearch() {
+    async function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
         if (searchInputRef.current.value) {
             const searchTeam = searchInputRef.current.value;
 
@@ -100,15 +102,13 @@ export default function TeamsPage({
         <>
             <Header />
             <Container>
-                <div>
+                <form onSubmit={handleSearch}>
                     <SearchBar
                         placeholder="Search for a team"
                         ref={searchInputRef}
                     />
-                    <button type="button" onClick={handleSearch}>
-                        Search
-                    </button>
-                </div>
+                    <button type="submit">Search</button>
+                </form>
             </Container>
             <Teams>
                 {!searchedTeams.length &&

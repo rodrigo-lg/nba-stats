@@ -4,7 +4,7 @@ export const Container = styled.div`
     margin: calc(94px + 2em) auto 0;
     width: 80%;
 
-    div {
+    form {
         margin: 0 auto;
         max-width: 700px;
 
