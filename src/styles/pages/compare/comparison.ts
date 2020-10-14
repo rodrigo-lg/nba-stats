@@ -25,6 +25,7 @@ export const Team = styled.div`
     flex-direction: column;
     align-items: center;
     margin-bottom: 40px;
+    padding: 12px;
 
     &:first-child {
         border-right: 3px solid gray;
@@ -88,6 +89,7 @@ export const Player = styled.div`
     flex-direction: column;
     align-items: center;
     margin-bottom: 40px;
+    padding: 12px;
 
     &:first-child {
         border-right: 3px solid gray;
@@ -98,8 +100,6 @@ export const Player = styled.div`
 
         li:first-child {
             margin: 20px 0;
-            margin-left: 10px;
-
             text-align: center;
             font-size: 1.5em;
             font-weight: bold;
@@ -129,4 +129,9 @@ export const Player = styled.div`
             }
         }
     }
+`;
+
+export const Error = styled.p`
+    text-align: center;
+    font-size: 1.2em;
 `;

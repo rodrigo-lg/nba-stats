@@ -4,7 +4,12 @@ import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import OpposingBarsChart from '@/components/OpposingBarsChart';
 
-import { Container, Team, Player } from '@/styles/pages/compare/comparison';
+import {
+    Container,
+    Team,
+    Player,
+    Error,
+} from '@/styles/pages/compare/comparison';
 
 import positions from '@/utils/positions';
 import teamsInfo from '@/utils/teams';
@@ -79,6 +84,7 @@ export default function Comparison(): JSX.Element {
     const [teamsStats, setTeamsStats] = useState<TeamStats[]>([]);
     const [players, setPlayers] = useState<Player[]>([]);
     const [playersStats, setPlayersStats] = useState<PlayerStats[]>([]);
+    const [error, setError] = useState(false);
     const { query } = useRouter();
 
     const fetchTeamsData = useCallback(async () => {
@@ -163,18 +169,21 @@ export default function Comparison(): JSX.Element {
 
         const fetchedPlayersStats: PlayerStats[] = await response.json();
 
-        fetchedPlayersStats.forEach(player => {
-            Object.keys(player).map(key => {
-                player[key] = Number(player[key]);
+        if (fetchedPlayersStats[0] && fetchedPlayersStats[1]) {
+            fetchedPlayersStats.forEach(player => {
+                Object.keys(player).map(key => {
+                    player[key] = Number(player[key]);
+                });
             });
-        });
 
-        Object.keys(fetchedPlayersStats[0]).map(key => {
-            fetchedPlayersStats[0][key] = -fetchedPlayersStats[0][key];
-        });
+            Object.keys(fetchedPlayersStats[0]).map(key => {
+                fetchedPlayersStats[0][key] = -fetchedPlayersStats[0][key];
+            });
 
-        setPlayers(fetchedPlayers);
-        setPlayersStats(fetchedPlayersStats);
+            console.log(fetchedPlayersStats);
+            setPlayers(fetchedPlayers);
+            setPlayersStats(fetchedPlayersStats);
+        } else setError(true);
     }, [query]);
 
     useEffect(() => {
@@ -247,7 +256,6 @@ export default function Comparison(): JSX.Element {
                             [teamsStats[1].wins, teamsStats[1].losses],
                         ]}
                         title="Games comparisons"
-                        max={90}
                         height={240}
                     />
 
@@ -293,7 +301,6 @@ export default function Comparison(): JSX.Element {
                             ],
                         ]}
                         title="Points comparisons"
-                        max={15000}
                         height={440}
                     />
 
@@ -330,13 +337,12 @@ export default function Comparison(): JSX.Element {
                             ],
                         ]}
                         title="Plays comparisons"
-                        max={6000}
                         height={440}
                     />
                 </Container>
             )}
 
-            {players[0] && playersStats[0] && (
+            {players[0] && playersStats[0] && !error && (
                 <Container>
                     <div>
                         <Player>
@@ -402,9 +408,43 @@ export default function Comparison(): JSX.Element {
                     </div>
 
                     <OpposingBarsChart
+                        categories={['Games played']}
+                        colors={[
+                            `#${teamsInfo[players[0].team].primary_color}`,
+                            `#${teamsInfo[players[1].team].primary_color}`,
+                        ]}
+                        names={[
+                            `${players[0].first_name} ${players[0].last_name}`,
+                            `${players[1].first_name} ${players[1].last_name}`,
+                        ]}
+                        series={[
+                            [playersStats[0].games],
+                            [playersStats[1].games],
+                        ]}
+                        title="Number of games played"
+                        height={180}
+                    />
+
+                    <OpposingBarsChart
+                        categories={['Minutes played']}
+                        colors={[
+                            `#${teamsInfo[players[0].team].primary_color}`,
+                            `#${teamsInfo[players[1].team].primary_color}`,
+                        ]}
+                        names={[
+                            `${players[0].first_name} ${players[0].last_name}`,
+                            `${players[1].first_name} ${players[1].last_name}`,
+                        ]}
+                        series={[
+                            [playersStats[0].minutes],
+                            [playersStats[1].minutes],
+                        ]}
+                        title="Number of minutes played"
+                        height={180}
+                    />
+
+                    <OpposingBarsChart
                         categories={[
-                            // 'Games played',
-                            // 'Minutes played',
                             'Points made',
                             'Field goals made',
                             'Field goals attempted',
@@ -450,7 +490,6 @@ export default function Comparison(): JSX.Element {
                             ],
                         ]}
                         title="Performance comparisons"
-                        max={3300}
                         height={440}
                     />
 
@@ -493,9 +532,17 @@ export default function Comparison(): JSX.Element {
                             ],
                         ]}
                         title="Plays comparisons"
-                        max={1500}
                         height={440}
                     />
+                </Container>
+            )}
+
+            {error && (
+                <Container>
+                    <Error>
+                        Some of the choosen players doesn't have any statistics
+                        :(
+                    </Error>
                 </Container>
             )}
         </>
