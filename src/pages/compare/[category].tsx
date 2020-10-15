@@ -244,7 +244,7 @@ export default function Comparison(): JSX.Element {
                     </div>
 
                     <OpposingBarsChart
-                        categories={['Games', 'Wins', 'Losses']}
+                        categories={['Wins', 'Losses']}
                         colors={[
                             `#${teams[0].primary_color}`,
                             `#${teams[1].primary_color}`,
