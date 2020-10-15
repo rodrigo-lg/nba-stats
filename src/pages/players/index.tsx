@@ -37,7 +37,7 @@ export default function PlayersPage({
     const [resultInfo, setResultInfo] = useState('');
 
     useEffect(() => {
-        const { search } = router.query;
+        const { search }: { search?: string } = router.query;
 
         setSearchedPlayers([]);
 
@@ -46,7 +46,7 @@ export default function PlayersPage({
 
             const dbQuery = `SELECT player_id, first_name, last_name, team, position, height, weight, photo_url
                                 FROM players
-                                WHERE concat(first_name, ' ', last_name) LIKE '%${search}%'
+                                WHERE concat(LOWER(first_name), ' ', LOWER(last_name)) LIKE '%${search.toLowerCase()}%'
                                 ORDER BY first_name 
                                 LIMIT 18 
                                 OFFSET ${(pageNumber - 1) * 18}`;

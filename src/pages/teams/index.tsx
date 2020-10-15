@@ -32,7 +32,7 @@ export default function TeamsPage({
     const [resultInfo, setResultInfo] = useState('');
 
     useEffect(() => {
-        const { search } = router.query;
+        const { search }: { search?: string } = router.query;
 
         setSearchedTeams([]);
 
@@ -41,7 +41,7 @@ export default function TeamsPage({
 
             const dbQuery = `SELECT team_id, city, name, conference, division, wikipedia_logo_url
                             FROM teams
-                            WHERE name LIKE '%${search}%'
+                            WHERE LOWER(name) LIKE '%${search.toLowerCase()}%'
                             LIMIT 18
                             OFFSET ${(pageNumber - 1) * 18}`;
 
